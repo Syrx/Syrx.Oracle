@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Description>This package hosts special handling for Oracle to support multiple result sets. </Description>
+		<PackageTags>syrx;data access;orm;micro-orm;oracle</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.6.1" />
+		<PackageReference Include="Syrx.Commanders.Databases" Version="2.*" />
+	</ItemGroup>
+
+</Project>

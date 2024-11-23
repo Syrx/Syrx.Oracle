@@ -1,0 +1,123 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{5B8F9398-E8B6-4EA9-8A6B-3CE1D140B8F3}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{FAB69DD2-45EC-4E79-9B8C-92F99AA6AF27}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{43FD9DF5-C121-4A7B-A9D9-1719C9378F92}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DB05C0DF-59BB-471C-8380-CA2AE8D08EFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{0EC841AF-8948-4544-9DEE-839E531FA8AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration", "{893D199E-E8CB-4A2C-9CA2-8974BFCC223D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syrx.Commanders.Databases.Connectors.Oracle", "src\Syrx.Commanders.Databases.Connectors.Oracle\Syrx.Commanders.Databases.Connectors.Oracle.csproj", "{0CB7F714-C186-4003-AD0D-EDAB5315EC49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syrx.Commanders.Databases.Connectors.Oracle.Extensions", "src\Syrx.Commanders.Databases.Connectors.Oracle.Extensions\Syrx.Commanders.Databases.Connectors.Oracle.Extensions.csproj", "{361BF3D0-8E32-47EC-B4C9-E17A055E5909}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syrx.Commanders.Databases.Oracle", "src\Syrx.Commanders.Databases.Oracle\Syrx.Commanders.Databases.Oracle.csproj", "{83C9C14C-D17F-4ACB-AEC2-AD787EFB44AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syrx.Oracle", "src\Syrx.Oracle\Syrx.Oracle.csproj", "{4020B109-12E2-4330-A815-99C394B9EE1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syrx.Oracle.Extensions", "src\Syrx.Oracle.Extensions\Syrx.Oracle.Extensions.csproj", "{83564E80-F69A-401C-9596-6F7F046C4127}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syrx.Commanders.Databases.Tests.Integration.Models", "tests\integration\Syrx.Commanders.Databases.Tests.Integration.Models\Syrx.Commanders.Databases.Tests.Integration.Models.csproj", "{C62DF17E-13EC-4903-8B63-9BF67DE9151F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syrx.Oracle.Tests.Integration", "tests\integration\Syrx.Oracle.Tests.Integration\Syrx.Oracle.Tests.Integration.csproj", "{D9C59102-FD67-4730-B8D3-4C4F0EDE8D91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syrx.Commanders.Databases.Connectors.Oracle.Extensions.Tests.Unit", "tests\unit\Syrx.Commanders.Databases.Connectors.Oracle.Extensions.Tests.Unit\Syrx.Commanders.Databases.Connectors.Oracle.Extensions.Tests.Unit.csproj", "{33A7373A-F497-4781-996F-E6509096668B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syrx.Commanders.Databases.Connectors.Oracle.Tests.Unit", "tests\unit\Syrx.Commanders.Databases.Connectors.Oracle.Tests.Unit\Syrx.Commanders.Databases.Connectors.Oracle.Tests.Unit.csproj", "{3EF4C1E4-E97B-4802-A38E-FBA579B02286}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syrx.Tests.Extensions", "tests\unit\Syrx.Tests.Extensions\Syrx.Tests.Extensions.csproj", "{F77AE6A0-58DE-471F-96E9-0CB9043A37D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{1D0ECB64-9F8D-456D-A989-989AA2D95C8F}"
+	ProjectSection(SolutionItems) = preProject
+		.github\dependabot.yml = .github\dependabot.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{CA98E692-B1A1-4758-BE9E-BB906873E6EC}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\publish.yml = .github\workflows\publish.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CB7F714-C186-4003-AD0D-EDAB5315EC49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CB7F714-C186-4003-AD0D-EDAB5315EC49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CB7F714-C186-4003-AD0D-EDAB5315EC49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CB7F714-C186-4003-AD0D-EDAB5315EC49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{361BF3D0-8E32-47EC-B4C9-E17A055E5909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{361BF3D0-8E32-47EC-B4C9-E17A055E5909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{361BF3D0-8E32-47EC-B4C9-E17A055E5909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{361BF3D0-8E32-47EC-B4C9-E17A055E5909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C9C14C-D17F-4ACB-AEC2-AD787EFB44AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C9C14C-D17F-4ACB-AEC2-AD787EFB44AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C9C14C-D17F-4ACB-AEC2-AD787EFB44AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C9C14C-D17F-4ACB-AEC2-AD787EFB44AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4020B109-12E2-4330-A815-99C394B9EE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4020B109-12E2-4330-A815-99C394B9EE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4020B109-12E2-4330-A815-99C394B9EE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4020B109-12E2-4330-A815-99C394B9EE1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83564E80-F69A-401C-9596-6F7F046C4127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83564E80-F69A-401C-9596-6F7F046C4127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83564E80-F69A-401C-9596-6F7F046C4127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83564E80-F69A-401C-9596-6F7F046C4127}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62DF17E-13EC-4903-8B63-9BF67DE9151F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62DF17E-13EC-4903-8B63-9BF67DE9151F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62DF17E-13EC-4903-8B63-9BF67DE9151F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62DF17E-13EC-4903-8B63-9BF67DE9151F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9C59102-FD67-4730-B8D3-4C4F0EDE8D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C59102-FD67-4730-B8D3-4C4F0EDE8D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C59102-FD67-4730-B8D3-4C4F0EDE8D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C59102-FD67-4730-B8D3-4C4F0EDE8D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33A7373A-F497-4781-996F-E6509096668B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33A7373A-F497-4781-996F-E6509096668B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33A7373A-F497-4781-996F-E6509096668B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33A7373A-F497-4781-996F-E6509096668B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EF4C1E4-E97B-4802-A38E-FBA579B02286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF4C1E4-E97B-4802-A38E-FBA579B02286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF4C1E4-E97B-4802-A38E-FBA579B02286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF4C1E4-E97B-4802-A38E-FBA579B02286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F77AE6A0-58DE-471F-96E9-0CB9043A37D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F77AE6A0-58DE-471F-96E9-0CB9043A37D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F77AE6A0-58DE-471F-96E9-0CB9043A37D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F77AE6A0-58DE-471F-96E9-0CB9043A37D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0EC841AF-8948-4544-9DEE-839E531FA8AF} = {DB05C0DF-59BB-471C-8380-CA2AE8D08EFD}
+		{893D199E-E8CB-4A2C-9CA2-8974BFCC223D} = {DB05C0DF-59BB-471C-8380-CA2AE8D08EFD}
+		{0CB7F714-C186-4003-AD0D-EDAB5315EC49} = {43FD9DF5-C121-4A7B-A9D9-1719C9378F92}
+		{361BF3D0-8E32-47EC-B4C9-E17A055E5909} = {43FD9DF5-C121-4A7B-A9D9-1719C9378F92}
+		{83C9C14C-D17F-4ACB-AEC2-AD787EFB44AC} = {43FD9DF5-C121-4A7B-A9D9-1719C9378F92}
+		{4020B109-12E2-4330-A815-99C394B9EE1F} = {43FD9DF5-C121-4A7B-A9D9-1719C9378F92}
+		{83564E80-F69A-401C-9596-6F7F046C4127} = {43FD9DF5-C121-4A7B-A9D9-1719C9378F92}
+		{C62DF17E-13EC-4903-8B63-9BF67DE9151F} = {893D199E-E8CB-4A2C-9CA2-8974BFCC223D}
+		{D9C59102-FD67-4730-B8D3-4C4F0EDE8D91} = {893D199E-E8CB-4A2C-9CA2-8974BFCC223D}
+		{33A7373A-F497-4781-996F-E6509096668B} = {0EC841AF-8948-4544-9DEE-839E531FA8AF}
+		{3EF4C1E4-E97B-4802-A38E-FBA579B02286} = {0EC841AF-8948-4544-9DEE-839E531FA8AF}
+		{F77AE6A0-58DE-471F-96E9-0CB9043A37D1} = {0EC841AF-8948-4544-9DEE-839E531FA8AF}
+		{1D0ECB64-9F8D-456D-A989-989AA2D95C8F} = {FAB69DD2-45EC-4E79-9B8C-92F99AA6AF27}
+		{CA98E692-B1A1-4758-BE9E-BB906873E6EC} = {1D0ECB64-9F8D-456D-A989-989AA2D95C8F}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Description>This package hosts extension methods to make wiring up support for Oracle databases simpler and easier. </Description>
+		<PackageTags>syrx;data access;orm;micro-orm;oracle</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Syrx.Commanders.Databases.Connectors.Oracle.Extensions\Syrx.Commanders.Databases.Connectors.Oracle.Extensions.csproj" />
+		<ProjectReference Include="..\Syrx.Commanders.Databases.Oracle\Syrx.Commanders.Databases.Oracle.csproj" />
+		<ProjectReference Include="..\Syrx.Oracle\Syrx.Oracle.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Description>This package provides Syrx support for Oracle databases.</Description>
+		<PackageTags>syrx;data access;orm;micro-orm;oracle</PackageTags>
+	</PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="Syrx.Commanders.Databases" Version="2.*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Syrx.Commanders.Databases.Connectors.Oracle\Syrx.Commanders.Databases.Connectors.Oracle.csproj" />
+		<ProjectReference Include="..\Syrx.Commanders.Databases.Oracle\Syrx.Commanders.Databases.Oracle.csproj" />
+	</ItemGroup>
+
+</Project>
