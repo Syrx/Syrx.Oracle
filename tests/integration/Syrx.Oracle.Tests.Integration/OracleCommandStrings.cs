@@ -3,6 +3,23 @@
     public static class OracleCommandStrings
     {
         public const string Alias = "Syrx.Oracle";
+
+        public static class Assertions
+        {
+            public static class Execute
+            {
+                public const string SupportsTransactionRollback = "ORA-01438: value larger than specified precision allowed for this column\nORA-06512: at line 6\nhttps://docs.oracle.com/error-help/db/ora-01438/";
+                public const string ExceptionsAreReturnedToCaller = "ORA-00900: invalid SQL statement\nhttps://docs.oracle.com/error-help/db/ora-00900/";
+                public const string SupportsRollbackOnParameterlessCalls = "ORA-06550: line 3, column 24:\r\nPL/SQL: ORA-00933: SQL command not properly ended\r\nORA-06550: line 3, column 5:\r\nPL/SQL: SQL Statement ignored\r\nORA-06550: line 5, column 8:\r\nPLS-00103: Encountered the symbol \"end-of-file\" when expecting one of the following:\r\n\r\n   ;\r\nhttps://docs.oracle.com/error-help/db/ora-06550/";
+
+            }
+
+            public static class Query
+            {
+                public static string ExceptionsAreReturnedToCaller = "ORA-00900: invalid SQL statement\nhttps://docs.oracle.com/error-help/db/ora-00900/";
+                
+            }
+        }
         
         public static class Setup
         {
@@ -536,7 +553,12 @@ BEGIN
     OPEN :1 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < 2;
 END;
 ";
-                
+                public const string OneTypeMultipleWithParameters = @"
+BEGIN
+    OPEN :1 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < :id;
+END;
+";
+
                 public const string TwoTypeMultiple = @"
 BEGIN
     OPEN :1 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < 2;
@@ -788,7 +810,7 @@ INSERT INTO distributed_transaction (id, name, value, modified) VALUES (:Id, :Na
 ";
             
             public const string SuccessfullyWithResponse = @"
-INSERT INTO writes (id, name, value, modified) VALUES (:Id, :Name, :Value, :Modified)
+INSERT INTO writes (name, value, modified) VALUES (:Name, :Value, :Modified)
 ";
             
             public const string SuccessfullyWithResponseResponse = @"select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from writes where name = :Name";

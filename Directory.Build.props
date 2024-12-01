@@ -26,6 +26,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageTags>syrx;data access;orm;micro-orm</PackageTags>
 		<PackageReleaseNotes>Updated to .NET8.0.</PackageReleaseNotes>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		
 		<!-- ============================================================================ -->
 		<!-- organization info -->
@@ -45,6 +46,13 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
 	<!--<ItemGroup>

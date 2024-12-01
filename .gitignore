@@ -56,3 +56,4 @@ Temporary Items
 **/obj
 **/bin
 /.NCrunch_Syrx.*/*
+*/*ncrunchTemp
