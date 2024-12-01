@@ -1,4 +1,6 @@
 ﻿
+using Syrx.Commanders.Databases.Tests.Integration.Models.Immutable;
+
 namespace Syrx.Oracle.Tests.Integration.DatabaseCommanderTests
 {
     [Collection(nameof(OracleFixtureCollection))]
@@ -24,7 +26,7 @@ namespace Syrx.Oracle.Tests.Integration.DatabaseCommanderTests
         }
 
         [Theory]
-        [MemberData(nameof(ModelGenerators.Multiple.OneTypeWithParameters), MemberType = typeof(ModelGenerators.Multiple))]
+        [MemberData(nameof(OneTypeWithParameters))]
         public void OneTypeMultipleWithParameters<T1, TResult>(OneType<IEnumerable<T1>, IEnumerable<TResult>> input)
         {
             var map = input.Map;
@@ -546,5 +548,21 @@ namespace Syrx.Oracle.Tests.Integration.DatabaseCommanderTests
                 input.Sixteen);
             Equivalent(expected, result);
         }
+
+
+        public static IEnumerable<object[]> OneTypeWithParameters => [
+    [new OneType<IEnumerable<ImmutableType>,
+                    IEnumerable<ImmutableOneType<
+                        IEnumerable<ImmutableType>,
+                        IEnumerable<ImmutableType>>>>(
+                    [
+                        new ImmutableType(1, "entry 1", 10, DateTime.Today)
+                    ],
+                    (a) =>
+                        [
+                            new ImmutableOneType<IEnumerable<ImmutableType>, IEnumerable<ImmutableType>>(a)
+                        ], Parameters: new { id = 2 }, Method:"OneTypeMultipleWithParameters"
+                        )
+                    ]
     }
 }
