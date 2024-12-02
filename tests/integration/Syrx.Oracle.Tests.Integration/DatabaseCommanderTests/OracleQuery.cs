@@ -1,5 +1,4 @@
-﻿
-using Syrx.Commanders.Databases.Tests.Integration.Models.Immutable;
+﻿using Syrx.Commanders.Databases.Tests.Integration.Models.Immutable;
 
 namespace Syrx.Oracle.Tests.Integration.DatabaseCommanderTests
 {
@@ -549,20 +548,26 @@ namespace Syrx.Oracle.Tests.Integration.DatabaseCommanderTests
             Equivalent(expected, result);
         }
 
-
+        
         public static IEnumerable<object[]> OneTypeWithParameters => [
-    [new OneType<IEnumerable<ImmutableType>,
+            [
+                new OneType<IEnumerable<ImmutableType>,
                     IEnumerable<ImmutableOneType<
                         IEnumerable<ImmutableType>,
-                        IEnumerable<ImmutableType>>>>(
+                        IEnumerable<ImmutableType>>>>
+                (
                     [
-                        new ImmutableType(1, "entry 1", 10, DateTime.Today)
-                    ],
-                    (a) =>
-                        [
-                            new ImmutableOneType<IEnumerable<ImmutableType>, IEnumerable<ImmutableType>>(a)
-                        ], Parameters: new { id = 2 }, Method:"OneTypeMultipleWithParameters"
+                    new ImmutableType(1, "entry 1", 10, DateTime.Today)],
+                    (a) => [
+                        new ImmutableOneType<
+                            IEnumerable<ImmutableType>, 
+                            IEnumerable<ImmutableType>>(a) 
+                        ], 
+                    Parameters: new { id = 2 }, 
+                    Method:"OneTypeMultipleWithParameters"
                         )
                     ]
+            ];
+        
     }
 }
