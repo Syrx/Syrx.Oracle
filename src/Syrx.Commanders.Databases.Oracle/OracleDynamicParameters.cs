@@ -10,7 +10,7 @@ namespace Syrx.Commanders.Databases.Oracle
     /// provide support for multiple result sets. 
     /// </summary>
     /// <notes>
-    /// Lifted entirely from https://stackoverflow.com/a/41110515
+    /// Lifted (almost) entirely from https://stackoverflow.com/a/41110515
     /// Thank you to nw. and greyseal96
     /// </notes>
 
@@ -20,16 +20,11 @@ namespace Syrx.Commanders.Databases.Oracle
 
         private readonly List<OracleParameter> oracleParameters = new List<OracleParameter>();
 
-        public OracleDynamicParameters(params string[] cursorNames)
+        public OracleDynamicParameters(object parameters = null, string[] cursorNames = null)
         {
-            dynamicParameters = new DynamicParameters();
-            AddCursorParameters(cursorNames);
-        }
-
-        public OracleDynamicParameters(object template = null, params string[] cursorNames)
-        {
-            dynamicParameters = new DynamicParameters(template);
-            AddCursorParameters(cursorNames);
+            var cursors = cursorNames ?? Enumerable.Range(1, 16).Select(i => i.ToString()).ToArray();
+            dynamicParameters = new DynamicParameters(parameters);
+            AddCursorParameters(cursors);
         }
 
         private void AddCursorParameters(params string[] refCursorNames)
@@ -50,13 +45,20 @@ namespace Syrx.Commanders.Databases.Oracle
                 oracleCommand.Parameters.AddRange(oracleParameters.ToArray());
             }
         }
+       
+        /// <summary>
+        /// Returns a new instance of <see cref="OracleDynamicParameters"/> using an incrementing value as a default cursor name (starting at 1). 
+        /// </summary>
+        /// <param name="parameters">Parameters to pass to the query.</param>
+        /// <returns></returns>
+        public static OracleDynamicParameters Cursors(object parameters = null) => new OracleDynamicParameters(parameters);
 
         /// <summary>
-        /// Returns an array of cursor names using an incrementing number. 
+        /// Returns a new instance of <see cref="OracleDynamicParameters"/> using a supplied set of named cursors. 
         /// </summary>
-        /// <param name="size"></param>
+        /// <param name="cursors">A string array of cursor names corresponding to the their names on the PL/SQL statement.</param>
+        /// <param name="parameters">An optional set of parameters to pass to the query.</param>
         /// <returns></returns>
-        public static OracleDynamicParameters Cursors(int size = 16) => 
-            new OracleDynamicParameters(Enumerable.Range(1, size).Select(i => i.ToString()).ToArray());
+        public static OracleDynamicParameters Cursors(string[] cursors, object parameters = null) => new OracleDynamicParameters(parameters, cursors);
     }
 }

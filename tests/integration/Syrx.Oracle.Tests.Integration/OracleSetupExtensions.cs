@@ -223,9 +223,17 @@ namespace Syrx.Oracle.Tests.Integration
                     .UseConnectionAlias(OracleCommandStrings.Alias)
                     .UseCommandText(OracleCommandStrings.Query.Multiple.ThreeTypeMultiple))
                 .ForMethod(
+                    nameof(OracleQuery.ThreeTypeMultipleWithParameters), d => d
+                    .UseConnectionAlias(OracleCommandStrings.Alias)
+                    .UseCommandText(OracleCommandStrings.Query.Multiple.ThreeTypeMultipleWithParameters))
+                .ForMethod(
                     nameof(Query.FourTypeMultiple), d => d
                     .UseConnectionAlias(OracleCommandStrings.Alias)
                     .UseCommandText(OracleCommandStrings.Query.Multiple.FourTypeMultiple))
+                .ForMethod(
+                    nameof(OracleQuery.FourTypeMultipleWithParameters), d => d
+                    .UseConnectionAlias(OracleCommandStrings.Alias)
+                    .UseCommandText(OracleCommandStrings.Query.Multiple.FourTypeMultipleWithParameters))
                 .ForMethod(
                     nameof(Query.FiveTypeMultiple), d => d
                     .UseConnectionAlias(OracleCommandStrings.Alias)
