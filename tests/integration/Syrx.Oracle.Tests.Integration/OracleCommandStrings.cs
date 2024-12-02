@@ -574,6 +574,14 @@ BEGIN
 END;
 ";
 
+                public const string ThreeTypeMultipleWithParameters = @"
+BEGIN
+    OPEN :by_id    FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < :id;
+    OPEN :by_name  FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where name like :name and id < 3;
+    OPEN :by_value FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where value < :value;
+END;
+";
+
                 public const string FourTypeMultiple = @"
 BEGIN
     OPEN :1 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < 2;
@@ -582,6 +590,16 @@ BEGIN
     OPEN :4 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < 5;
 END;
 ";
+
+                public const string FourTypeMultipleWithParameters = @"
+BEGIN
+    OPEN :1 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < :id1;
+    OPEN :2 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < :id2;
+    OPEN :3 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < :id3;
+    OPEN :4 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < :id4;
+END;
+";
+
 
                 public const string FiveTypeMultiple = @"
 BEGIN

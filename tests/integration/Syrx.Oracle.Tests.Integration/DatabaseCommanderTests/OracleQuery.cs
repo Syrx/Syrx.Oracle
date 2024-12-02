@@ -1,11 +1,12 @@
-﻿using Syrx.Commanders.Databases.Tests.Integration.Models.Immutable;
+﻿using Syrx.Commanders.Databases.Tests.Extensions;
+using Syrx.Commanders.Databases.Tests.Integration.Models.Immutable;
 
 namespace Syrx.Oracle.Tests.Integration.DatabaseCommanderTests
 {
     [Collection(nameof(OracleFixtureCollection))]
     public class OracleQuery(OracleFixture fixture) : Query(fixture) 
     {
-        private OracleDynamicParameters _cursors = Cursors();
+        private OracleDynamicParameters _cursors = Cursors(); //Cursors();
         private ICommander<Query> _commander = fixture.ResolveCommander<Query>();
 
         [Theory]
@@ -31,7 +32,7 @@ namespace Syrx.Oracle.Tests.Integration.DatabaseCommanderTests
             var map = input.Map;
             var method = input.Method;
             string[] cursors = { "1" }; 
-            var parameters = new OracleDynamicParameters(template:new { id = 2 }, cursorNames: cursors);
+            var parameters = new OracleDynamicParameters(parameters:new { id = 2 }, cursorNames: cursors);
 
             var result = _commander.Query(map, parameters, method);
 
@@ -81,6 +82,34 @@ namespace Syrx.Oracle.Tests.Integration.DatabaseCommanderTests
         }
 
         [Theory]
+        [MemberData(nameof(ModelGenerators.Multiple.ThreeType), MemberType = typeof(ModelGenerators.Multiple))]
+        public void ThreeTypeMultipleWithParameters<T1, T2, T3, TResult>(
+            ThreeType<
+                IEnumerable<T1>,
+                IEnumerable<T2>,
+                IEnumerable<T3>,
+                IEnumerable<TResult>> input)
+        {
+
+            var map = input.Map;
+            
+            string[] cursors = { "by_id", "by_name", "by_value" };
+            var arguments = new { id = 2, name = "entry%", value = 40 };
+            var parameters = Cursors(cursors, arguments);
+
+            var result = _commander.Query(map, parameters);
+
+            NotNull(result);
+            Single(result);
+
+            var expected = map(
+                input.One,
+                input.Two,
+                input.Three);
+            Equivalent(expected, result);
+        }
+
+        [Theory]
         [MemberData(nameof(ModelGenerators.Multiple.FourType), MemberType = typeof(ModelGenerators.Multiple))]
         public override void FourTypeMultiple<T1, T2, T3, T4, TResult>(
           FourType<
@@ -103,6 +132,35 @@ namespace Syrx.Oracle.Tests.Integration.DatabaseCommanderTests
                 input.Four);
             Equivalent(expected, result);
         }
+
+        [Theory]
+        [MemberData(nameof(ModelGenerators.Multiple.FourType), MemberType = typeof(ModelGenerators.Multiple))]
+        public void FourTypeMultipleWithParameters<T1, T2, T3, T4, TResult>(
+          FourType<
+              IEnumerable<T1>,
+              IEnumerable<T2>,
+              IEnumerable<T3>,
+              IEnumerable<T4>,
+              IEnumerable<TResult>> input)
+        {
+            var map = input.Map;
+
+            var arguments = new { id1 = 2, id2 = 3, id3 = 4, id4 = 5 };
+            var parameters = Cursors(arguments);
+
+            var result = _commander.Query(map, parameters);
+
+            NotNull(result);
+            Single(result);
+
+            var expected = map(
+                input.One,
+                input.Two,
+                input.Three,
+                input.Four);
+            Equivalent(expected, result);
+        }
+
 
         [Theory]
         [MemberData(nameof(ModelGenerators.Multiple.FiveType), MemberType = typeof(ModelGenerators.Multiple))]

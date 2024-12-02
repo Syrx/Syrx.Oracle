@@ -3,7 +3,7 @@
     [Collection(nameof(OracleFixtureCollection))]
     public class OracleQueryAsync(OracleFixture fixture) : QueryAsync(fixture) 
     {
-        private OracleDynamicParameters _cursors = Cursors();
+        private OracleDynamicParameters _cursors = Cursors(); //Cursors();
         private ICommander<Query> _commander = fixture.ResolveCommander<Query>();
 
         [Theory]
