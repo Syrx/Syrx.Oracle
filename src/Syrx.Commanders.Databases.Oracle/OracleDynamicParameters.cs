@@ -20,19 +20,19 @@ namespace Syrx.Commanders.Databases.Oracle
 
         private readonly List<OracleParameter> oracleParameters = new List<OracleParameter>();
 
-        public OracleDynamicParameters(params string[] refCursorNames)
+        public OracleDynamicParameters(params string[] cursorNames)
         {
             dynamicParameters = new DynamicParameters();
-            AddRefCursorParameters(refCursorNames);
+            AddCursorParameters(cursorNames);
         }
 
-        public OracleDynamicParameters(object template, params string[] refCursorNames)
+        public OracleDynamicParameters(object template = null, params string[] cursorNames)
         {
             dynamicParameters = new DynamicParameters(template);
-            AddRefCursorParameters(refCursorNames);
+            AddCursorParameters(cursorNames);
         }
 
-        private void AddRefCursorParameters(params string[] refCursorNames)
+        private void AddCursorParameters(params string[] refCursorNames)
         {
             foreach (string refCursorName in refCursorNames)
             {

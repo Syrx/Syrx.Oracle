@@ -1,4 +1,6 @@
-﻿namespace Syrx.Oracle.Tests.Integration
+﻿using Syrx.Oracle.Tests.Integration.DatabaseCommanderTests;
+
+namespace Syrx.Oracle.Tests.Integration
 {
 
     public static class OracleSetupExtensions
@@ -208,6 +210,10 @@
                     nameof(Query.OneTypeMultiple), d => d
                     .UseConnectionAlias(OracleCommandStrings.Alias)
                     .UseCommandText(OracleCommandStrings.Query.Multiple.OneTypeMultiple))
+                .ForMethod(
+                    nameof(OracleQuery.OneTypeMultipleWithParameters), d => d
+                    .UseConnectionAlias(OracleCommandStrings.Alias)
+                    .UseCommandText(OracleCommandStrings.Query.Multiple.OneTypeMultipleWithParameters))
                 .ForMethod(
                     nameof(Query.TwoTypeMultiple), d => d
                     .UseConnectionAlias(OracleCommandStrings.Alias)
