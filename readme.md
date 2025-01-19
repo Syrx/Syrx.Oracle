@@ -1,18 +1,32 @@
 # Syrx.Oracle
 
-Provides Syrx support for Oracle databases. 
+Provides Syrx support for Oracle databases. The overall experience of using [Syrx](https://github.com/Syrx/Syrx) remains _largely_ the same, however Oracle support of multiple result sets differs to that of many other RDBMS implementations. 
+
+> [!CAUTION]
+> As a result of this difference in the handling of multiple result sets, repositories written against Oracle instances may need code changes either when switching to Oracle or switching away from Oracle.
 
 # Installation
-We recommend installing the Extensions package which includes extension methods for easier configuration. 
+> [!TIP]
+> We recommend installing the Extensions package which includes extension methods for easier configuration. 
 
-```
-install-package Syrx.Oracle.Extensions
-```
+|Source|Command|
+|--|--|
+|.NET CLI|```dotnet add package Syrx.Oracle.Extensions```
+|Package Manager|```Install-Package Syrx.Oracle.Extensions```
+|Package Reference|```<PackageReference Include="Syrx.Oracle.Extensions" Version="2.4.0" />```|
+|Paket CLI|```paket add Syrx.Oracle.Extensions --version 2.4.0```|
+
+
 However, if you don't need the configuration options, you can install the standalone Oracle package. 
 
-```
-install-package Syrx.Oracle
-```
+|Source|Command|
+|--|--|
+|.NET CLI|```dotnet add package Syrx.Oracle```
+|Package Manager|```Install-Package Syrx.Oracle```
+|Package Reference|```<PackageReference Include="Syrx.Oracle" Version="2.4.0" />```|
+|Paket CLI|```paket add Syrx.Oracle --version 2.4.0```|
+
+
 ---
 # Known Issues
 ## Multiple Result Sets
