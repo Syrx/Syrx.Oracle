@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<Description>This package provides support for Oracle connections by implementing a OracleDatabaseConnector for the Syrx IDatabaseConnector. </Description>
 		<PackageTags>syrx;data access;orm;micro-orm;oracle</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.7.0" />
+		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.8.0" />
 	</ItemGroup>
 
 	<ItemGroup>
