@@ -2,6 +2,25 @@
 
 Core Oracle database connector for the Syrx framework.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Architecture](#architecture)
+- [Key Components](#key-components)
+- [Connection Management](#connection-management)
+- [Configuration](#configuration)
+- [Oracle-Specific Features](#oracle-specific-features)
+- [Multiple Result Sets](#multiple-result-sets)
+- [Error Handling](#error-handling)
+- [Performance Considerations](#performance-considerations)
+- [Testing](#testing)
+- [Related Packages](#related-packages)
+- [Requirements](#requirements)
+- [License](#license)
+- [Credits](#credits)
+
 ## Overview
 
 `Syrx.Commanders.Databases.Connectors.Oracle` provides the foundational Oracle database connectivity layer for the Syrx framework. This package implements the `IDatabaseConnector` interface specifically for Oracle databases using Oracle.ManagedDataAccess.Core as the underlying provider.
@@ -121,38 +140,6 @@ Supports all Oracle.ManagedDataAccess.Core connection string parameters:
 ```
 
 ## Usage Examples
-
-### Direct Usage (Advanced)
-
-```csharp
-using Syrx.Commanders.Databases.Connectors.Oracle;
-
-public class DirectUsageExample
-{
-    private readonly OracleDatabaseConnector _connector;
-
-    public DirectUsageExample()
-    {
-        _connector = new OracleDatabaseConnector();
-    }
-
-    public async Task<IEnumerable<Employee>> GetEmployeesAsync(string connectionString)
-    {
-        var commandSetting = new CommandSetting
-        {
-            ConnectionAlias = "default",
-            CommandText = "SELECT employee_id, first_name, last_name, email FROM employees WHERE is_active = :isActive"
-        };
-
-        var parameters = new { isActive = 1 };
-
-        return await _connector.QueryAsync<Employee>(
-            connectionString, 
-            commandSetting, 
-            parameters);
-    }
-}
-```
 
 ### Through Dependency Injection
 

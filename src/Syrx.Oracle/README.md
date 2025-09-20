@@ -2,6 +2,25 @@
 
 Oracle database data access provider for the Syrx framework.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Oracle-Specific Features](#oracle-specific-features)
+- [Configuration Patterns](#configuration-patterns)
+- [Advanced Usage](#advanced-usage)
+- [Multiple Result Sets](#multiple-result-sets)
+- [Error Handling](#error-handling)
+- [Performance Tips](#performance-tips)
+- [Testing](#testing)
+- [Migration Scenarios](#migration-scenarios)
+- [Related Packages](#related-packages)
+- [Requirements](#requirements)
+- [License](#license)
+- [Credits](#credits)
+
 ## Overview
 
 `Syrx.Oracle` provides Oracle database connectivity for the Syrx data access framework. Built on top of Oracle.ManagedDataAccess.Core (Oracle's official .NET provider), this package offers seamless integration with Oracle databases while maintaining Syrx's core principles of control, performance, and flexibility.

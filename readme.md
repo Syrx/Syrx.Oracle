@@ -5,6 +5,18 @@ Provides Syrx support for Oracle databases. The overall experience of using [Syr
 > [!CAUTION]
 > As a result of this difference in the handling of multiple result sets, repositories written against Oracle instances may need code changes either when switching to Oracle or switching away from Oracle.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Known Issues](#known-issues)
+  - [Multiple Result Sets](#multiple-result-sets)
+  - [Solution](#solution)
+- [Examples](#examples)
+  - [Without parameters](#without-parameters)
+  - [With parameters](#with-parameters)
+  - [Numbered Cursors](#numbered-cursors)
+  - [Named Cursors](#named-cursors)
+
 # Installation
 > [!TIP]
 > We recommend installing the Extensions package which includes extension methods for easier configuration. 

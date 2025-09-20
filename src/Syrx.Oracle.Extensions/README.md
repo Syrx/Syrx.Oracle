@@ -2,6 +2,28 @@
 
 Dependency injection extensions for Syrx Oracle integration.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Configuration Examples](#configuration-examples)
+- [Advanced Configuration](#advanced-configuration)
+- [Oracle-Specific Features](#oracle-specific-features)
+- [Service Lifetimes](#service-lifetimes)
+- [Multiple Database Support](#multiple-database-support)
+- [Environment-Specific Settings](#environment-specific-settings)
+- [Performance Optimization](#performance-optimization)
+- [Multiple Result Sets](#multiple-result-sets)
+- [Error Handling](#error-handling)
+- [Testing Integration](#testing-integration)
+- [Migration Scenarios](#migration-scenarios)
+- [Related Packages](#related-packages)
+- [Requirements](#requirements)
+- [License](#license)
+- [Credits](#credits)
+
 ## Overview
 
 `Syrx.Oracle.Extensions` provides seamless dependency injection integration for Oracle database data access in the Syrx framework. This package simplifies the registration and configuration of Oracle-specific services in .NET applications using Microsoft's dependency injection container.

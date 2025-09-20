@@ -2,6 +2,27 @@
 
 Dependency injection extensions for Syrx Oracle database connectors.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Key Extensions](#key-extensions)
+- [Usage](#usage)
+- [Service Registration Details](#service-registration-details)
+- [Service Lifetimes](#service-lifetimes)
+- [Configuration Examples](#configuration-examples)
+- [Oracle-Specific Configuration](#oracle-specific-configuration)
+- [Multiple Result Sets Support](#multiple-result-sets-support)
+- [Integration with Other Extensions](#integration-with-other-extensions)
+- [Error Handling](#error-handling)
+- [Performance Optimization](#performance-optimization)
+- [Testing Support](#testing-support)
+- [Related Packages](#related-packages)
+- [Requirements](#requirements)
+- [License](#license)
+- [Credits](#credits)
+
 ## Overview
 
 `Syrx.Commanders.Databases.Connectors.Oracle.Extensions` provides dependency injection and service registration extensions specifically for Oracle database connectors in the Syrx framework. This package enables easy registration of Oracle connectors with DI containers.
