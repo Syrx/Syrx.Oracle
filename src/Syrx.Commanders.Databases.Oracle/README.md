@@ -55,7 +55,7 @@ Install-Package Syrx.Commanders.Databases.Oracle
 
 **PackageReference**
 ```xml
-<PackageReference Include="Syrx.Commanders.Databases.Oracle" Version="2.4.5" />
+<PackageReference Include="Syrx.Commanders.Databases.Oracle" Version="3.0.0" />
 ```
 
 > **Note**: This package is typically used alongside `Syrx.Oracle` and `Syrx.Oracle.Extensions` for complete Oracle support.

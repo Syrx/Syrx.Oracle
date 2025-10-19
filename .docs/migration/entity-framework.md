@@ -38,7 +38,7 @@ This guide provides step-by-step instructions for migrating from Entity Framewor
      <PackageReference Include="Oracle.EntityFrameworkCore" Version="8.21.121" /> -->
 
 <!-- Add Syrx.Oracle packages -->
-<PackageReference Include="Syrx.Oracle.Extensions" Version="2.4.5" />
+<PackageReference Include="Syrx.Oracle.Extensions" Version="3.0.0" />
 <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 ```
 

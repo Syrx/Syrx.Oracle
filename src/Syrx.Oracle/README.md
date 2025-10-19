@@ -50,7 +50,7 @@ Install-Package Syrx.Oracle
 
 **PackageReference**
 ```xml
-<PackageReference Include="Syrx.Oracle" Version="2.4.5" />
+<PackageReference Include="Syrx.Oracle" Version="3.0.0" />
 ```
 
 ## Quick Start

@@ -13,8 +13,8 @@ Provides Syrx support for Oracle databases. The overall experience of using [Syr
 |--|--|
 |.NET CLI|```dotnet add package Syrx.Oracle.Extensions```
 |Package Manager|```Install-Package Syrx.Oracle.Extensions```
-|Package Reference|```<PackageReference Include="Syrx.Oracle.Extensions" Version="2.4.0" />```|
-|Paket CLI|```paket add Syrx.Oracle.Extensions --version 2.4.0```|
+|Package Reference|```<PackageReference Include="Syrx.Oracle.Extensions" Version="3.0.0" />```|
+|Paket CLI|```paket add Syrx.Oracle.Extensions --version 3.0.0```|
 
 
 However, if you don't need the configuration options, you can install the standalone Oracle package. 
@@ -23,8 +23,8 @@ However, if you don't need the configuration options, you can install the standa
 |--|--|
 |.NET CLI|```dotnet add package Syrx.Oracle```
 |Package Manager|```Install-Package Syrx.Oracle```
-|Package Reference|```<PackageReference Include="Syrx.Oracle" Version="2.4.0" />```|
-|Paket CLI|```paket add Syrx.Oracle --version 2.4.0```|
+|Package Reference|```<PackageReference Include="Syrx.Oracle" Version="3.0.0" />```|
+|Paket CLI|```paket add Syrx.Oracle --version 3.0.0```|
 
 
 ---

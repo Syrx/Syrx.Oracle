@@ -14,7 +14,7 @@ This example demonstrates basic Create, Read, Update, Delete operations using Sy
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Syrx.Oracle.Extensions" Version="2.4.5" />
+    <PackageReference Include="Syrx.Oracle.Extensions" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
   </ItemGroup>

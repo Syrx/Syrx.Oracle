@@ -50,7 +50,7 @@ Install-Package Syrx.Commanders.Databases.Connectors.Oracle
 
 **PackageReference**
 ```xml
-<PackageReference Include="Syrx.Commanders.Databases.Connectors.Oracle" Version="2.4.5" />
+<PackageReference Include="Syrx.Commanders.Databases.Connectors.Oracle" Version="3.0.0" />
 ```
 
 ## Core Components

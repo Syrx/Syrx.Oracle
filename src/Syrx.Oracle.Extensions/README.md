@@ -50,7 +50,7 @@ Install-Package Syrx.Oracle.Extensions
 
 **PackageReference**
 ```xml
-<PackageReference Include="Syrx.Oracle.Extensions" Version="2.4.5" />
+<PackageReference Include="Syrx.Oracle.Extensions" Version="3.0.0" />
 ```
 
 ## Quick Start

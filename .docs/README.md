@@ -118,12 +118,12 @@ Syrx.Oracle consists of several key components:
 
 ```xml
 <!-- Primary package (includes all dependencies) -->
-<PackageReference Include="Syrx.Oracle.Extensions" Version="2.4.5" />
+<PackageReference Include="Syrx.Oracle.Extensions" Version="3.0.0" />
 
 <!-- Or individual packages -->
-<PackageReference Include="Syrx.Oracle" Version="2.4.5" />
-<PackageReference Include="Syrx.Commanders.Databases.Oracle" Version="2.4.5" />
-<PackageReference Include="Syrx.Commanders.Databases.Connectors.Oracle" Version="2.4.5" />
+<PackageReference Include="Syrx.Oracle" Version="3.0.0" />
+<PackageReference Include="Syrx.Commanders.Databases.Oracle" Version="3.0.0" />
+<PackageReference Include="Syrx.Commanders.Databases.Connectors.Oracle" Version="3.0.0" />
 ```
 
 ### Requirements
