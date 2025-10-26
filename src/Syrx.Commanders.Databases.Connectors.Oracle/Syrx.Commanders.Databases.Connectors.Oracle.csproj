@@ -2,10 +2,11 @@
 	<PropertyGroup>
 		<Description>This package provides support for Oracle connections by implementing a OracleDatabaseConnector for the Syrx IDatabaseConnector. </Description>
 		<PackageTags>syrx;data access;orm;micro-orm;oracle</PackageTags>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.9.1" />
+		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.26.0" />
 	</ItemGroup>
 
 	<ItemGroup>
