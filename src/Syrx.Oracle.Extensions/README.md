@@ -1,5 +1,22 @@
 # Syrx.Oracle.Extensions
 
+Provides the recommended top-level package for adding Oracle support to Syrx applications.
+
+## Responsibilities
+
+- Bundles the Oracle provider packages used by application code
+- Adds the fluent registration experience for Oracle services
+- Simplifies adoption for repositories and applications that use Syrx with Oracle
+
+## When to use
+
+Use this package when you want the simplest installation and configuration path for Oracle support.
+
+## Related packages
+
+- Syrx.Oracle
+- Syrx.Commanders.Databases.Connectors.Oracle.Extensions# Syrx.Oracle.Extensions
+
 Dependency injection extensions for Syrx Oracle integration.
 
 ## Table of Contents

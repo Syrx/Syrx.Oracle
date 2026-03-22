@@ -1,143 +1,127 @@
 # Syrx.Oracle
 
-Provides Syrx support for Oracle databases. The overall experience of using [Syrx](https://github.com/Syrx/Syrx) remains _largely_ the same, however Oracle support of multiple result sets differs to that of many other RDBMS implementations. 
+Syrx.Oracle provides Oracle database support for the Syrx data access framework.
 
-> [!CAUTION]
-> As a result of this difference in the handling of multiple result sets, repositories written against Oracle instances may need code changes either when switching to Oracle or switching away from Oracle.
+## Overview
 
-# Installation
-> [!TIP]
-> We recommend installing the Extensions package which includes extension methods for easier configuration. 
+This repository contains the Oracle connector, Oracle-specific multiple-result-set support, extension methods for dependency injection, and unit and integration tests for the Oracle provider.
 
-|Source|Command|
+The 3.0.0 line targets .NET 10 and aligns package and workflow dependencies with the current Oracle and test toolchain.
+
+## Packages
+
+| Package | Purpose |
 |--|--|
-|.NET CLI|```dotnet add package Syrx.Oracle.Extensions```
-|Package Manager|```Install-Package Syrx.Oracle.Extensions```
-|Package Reference|```<PackageReference Include="Syrx.Oracle.Extensions" Version="3.0.0" />```|
-|Paket CLI|```paket add Syrx.Oracle.Extensions --version 3.0.0```|
+| Syrx.Oracle | Main Oracle provider package |
+| Syrx.Oracle.Extensions | Convenience package that adds Oracle-specific registration helpers |
+| Syrx.Commanders.Databases.Connectors.Oracle | Low-level Oracle connector implementation |
+| Syrx.Commanders.Databases.Connectors.Oracle.Extensions | Dependency injection extensions for the Oracle connector |
+| Syrx.Commanders.Databases.Oracle | Oracle-specific dynamic parameter support for cursor-based multiple result sets |
 
+## Requirements
 
-However, if you don't need the configuration options, you can install the standalone Oracle package. 
+- .NET 10 SDK
+- Oracle database access for runtime scenarios
+- Docker or an equivalent container runtime for the integration test suite
 
-|Source|Command|
+## Installation
+
+Install the higher-level extensions package when you want the simplest setup experience.
+
+| Source | Command |
 |--|--|
-|.NET CLI|```dotnet add package Syrx.Oracle```
-|Package Manager|```Install-Package Syrx.Oracle```
-|Package Reference|```<PackageReference Include="Syrx.Oracle" Version="3.0.0" />```|
-|Paket CLI|```paket add Syrx.Oracle --version 3.0.0```|
+| .NET CLI | `dotnet add package Syrx.Oracle.Extensions --version 3.0.0` |
+| Package Manager | `Install-Package Syrx.Oracle.Extensions -Version 3.0.0` |
+| Package Reference | `<PackageReference Include="Syrx.Oracle.Extensions" Version="3.0.0" />` |
 
+Install the core provider package when you only need the Oracle provider surface.
 
----
-# Known Issues
-## Multiple Result Sets
-Oracle doesn't natively support multiple result sets in the same way that SQL Server does. However, it _is_ possible to approximate this behaviour using cursors. For example, consider the PL/SQL below. 
+| Source | Command |
+|--|--|
+| .NET CLI | `dotnet add package Syrx.Oracle --version 3.0.0` |
+| Package Manager | `Install-Package Syrx.Oracle -Version 3.0.0` |
+| Package Reference | `<PackageReference Include="Syrx.Oracle" Version="3.0.0" />` |
 
+## Quick start
+
+```csharp
+services.UseSyrx(builder => builder
+    .UseOracle(oracle => oracle
+        .AddConnectionString("Default", connectionString)
+        .AddCommand(types => types
+            .ForType<EmployeeRepository>(methods => methods
+                .ForMethod(nameof(EmployeeRepository.GetAllAsync), command => command
+                    .UseConnectionAlias("Default")
+                    .UseCommandText("SELECT employee_id, first_name, last_name FROM employees"))))));
+```
+
+## Multiple result sets in Oracle
+
+Oracle does not expose multiple result sets in the same way as SQL Server. For Syrx Oracle repositories, multiple result sets are returned through REF CURSOR parameters.
+
+Use `OracleDynamicParameters.Cursors()` when a PL/SQL block opens one or more cursors.
+
+### Numbered cursors
 
 ```sql
 BEGIN
-    OPEN :1 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < 2;
-    OPEN :2 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < 3;
-    OPEN :3 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < 4;
+    OPEN :1 FOR SELECT employee_id, first_name FROM employees WHERE department_id = :deptId1;
+    OPEN :2 FOR SELECT employee_id, first_name FROM employees WHERE department_id = :deptId2;
 END;
 ```
 
-Executing this SQL via `Query<>` or `Query<>` execute may return an `OracleException` with a similar stack trace to this: 
-
-```
-Oracle.ManagedDataAccess.Client.OracleException : ORA-01008: not all variables bound
-https://docs.oracle.com/error-help/db/ora-01008/
-Stack Trace:
-     at OracleInternal.ServiceObjects.OracleFailoverMgrImpl.OnError(OracleConnection connection, CallHistoryRecord chr, Object mi, Exception ex, Boolean bTopLevelCall, Boolean& bCanRecordNewCall)
-     at Oracle.ManagedDataAccess.Client.OracleCommand.ExecuteDbDataReader(CommandBehavior behavior)
-  /_/Dapper/SqlMapper.cs(1156,0): at Dapper.SqlMapper.ExecuteReaderWithFlagsFallback(IDbCommand cmd, Boolean wasClosed, CommandBehavior behavior)
-  /_/Dapper/SqlMapper.cs(1123,0): at Dapper.SqlMapper.QueryMultipleImpl(IDbConnection cnn, CommandDefinition& command)
-  /_/Dapper/SqlMapper.cs(1108,0): at Dapper.SqlMapper.QueryMultiple(IDbConnection cnn, CommandDefinition command)
-   ....<your stack>....
-     at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
-     at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
-``` 
-
-## Solution
-The solution to this is simple, albeit less elegant than the authors would like. 
-
-1. In your repository code, add a reference to `Syrx.Commanders.Databases.Oracle`
-2. Pass a static instance of `OracleDynamicParameters.Cursors()` method as part of your parameters. 
-
-We recommend leverage the `using static` language feature. 
-
-
-### Examples
-You can see many exmaples of this in the `Syrx.Oracle.Tests.Integration` project. 
-
-This solution was taken from https://stackoverflow.com/a/41110515 with many thanks to _nw._ and _greyseal96_.
-
-#### Without parameters
 ```csharp
 using static Syrx.Commanders.Databases.Oracle.OracleDynamicParameters;
 
-// assumping a Func<> delegate called 'map' on a method that would not normally need parameters 
-var result = _commander.Query(map, Cursors());
+var parameters = Cursors(new { deptId1 = 10, deptId2 = 20 });
+var results = await commander.QueryAsync(map, parameters);
 ```
 
-#### With parameters
-There are two flavours to cursors with parameters:
-* Named cursors: if you have some reaon to know the names of the cursors.
-* Numbered cursors: these are still named cursors, but Syrx provides a convenience method to leverage default values. 
-
-#### Numbered Cursors
-This is the most common and simplest approach. Using the SQL below as an example, we can see that `OPEN :1` is the first of the numbered cursors and `:id1` as the corresponding parameter for that statement.  
+### Named cursors
 
 ```sql
 BEGIN
-    OPEN :1 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < :id1;
-    OPEN :2 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < :id2;
-    OPEN :3 FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < :id3;
+    OPEN :employees FOR SELECT employee_id, first_name FROM employees WHERE department_id = :deptId;
+    OPEN :departments FOR SELECT department_id, department_name FROM departments WHERE department_id = :deptId;
 END;
 ```
 
-To use this in C# we need to make use of the `Cursors` static method of the `OracleDynamicParameters` type. 
-We recommend that that you make use of the `using static` directive to help keep your code neat and concise. 
-
-In this example all we're doing is passing the arguments we'd normally pass directly to the `Query<>` method to the `NumberedCursors` static method. 
-We then take the instance of the `OracleDynamicParameters` and pass that to the `Query<>` method instead.
-
 ```csharp
-// at the top of your file, add this using static directive. 
 using static Syrx.Commanders.Databases.Oracle.OracleDynamicParameters;
 
-var arguments = new { id1 = 2, id2 = 3, id3 = 4 };  // the arguments we'd normally pass to the Query<> method. 
-var parameters = Cursors(arguments);                // return instance of OracleDynamicParameters. 
-var result = _commander.Query(map, parameters);     // pass OracleDynamicParameters to the Query<> method instead.
-
+string[] cursors = { "employees", "departments" };
+var parameters = Cursors(cursors, new { deptId = 10 });
+var results = await commander.QueryAsync(map, parameters);
 ```
 
-#### Named Cursors
-Although it's unlikely to be that common, there may be cases where you need to pass the names of the cursors. 
+Without the Oracle-specific cursor parameters, Oracle will typically raise `ORA-01008: not all variables bound`.
 
-In this SQL we can see that the names of the cursors are `by_id`,`by_name` and `by_value`.S
+## Build and test
 
-```sql
-BEGIN
-    OPEN :by_id    FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where id < :id;
-    OPEN :by_name  FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where name like :name and id < 3;
-    OPEN :by_value FOR select cast(id as number(5)) as ""Id"", name as ""Name"", value as ""Value"", modified as ""Modified"" from poco where value < :value;
-END;
+```powershell
+dotnet restore
+dotnet build Syrx.Oracle.sln --configuration Release
+dotnet test Syrx.Oracle.sln --configuration Release
 ```
 
-To use this in C# we need to make use of the overload of the `Cursors` static method which accepts a mandatory `string[]` argument. 
+Run integration tests only when the required Oracle test container prerequisites are available.
 
-In this example initialize a `string[]` variable with the cursors names corresponding to our SQL above. 
-We then pass this string array to the overloaded `Cursors` method. The `parameters` argument of this method is optional as it's entirely possible that you may find yourself with a query that leverages cursors but that has no parameters to limit the result sets within the query. 
+## Repository layout
 
-```csharp
-// at the top of your file, add this using static directive. 
-using static Syrx.Commanders.Databases.Oracle.OracleDynamicParameters;
+- `src/Syrx.Commanders.Databases.Connectors.Oracle` - Oracle connector implementation
+- `src/Syrx.Commanders.Databases.Connectors.Oracle.Extensions` - DI and builder extensions
+- `src/Syrx.Commanders.Databases.Oracle` - Oracle dynamic parameters for cursor handling
+- `src/Syrx.Oracle` - Main package surface
+- `src/Syrx.Oracle.Extensions` - Main extension package surface
+- `tests/unit` - Unit tests
+- `tests/integration` - Integration tests
 
+## Related packages
 
-string[] cursors = { "by_id", "by_name", "by_value" };          // the string array holding our cursors 
-var arguments = new { id = 2, name = "entry%", value = 40 };    // the arguments we'd normally pass to the Query<> method
-var parameters = Cursors(cursors, arguments);                   // return instance of OracleDynamicParameters from overload. 
-var result = _commander.Query(map, parameters);                 // pass OracleDynamicParameters to the Query<> method instead.
-```
+- Syrx
+- Syrx.Commanders.Databases
+- Oracle.ManagedDataAccess.Core
 
----
+## License
+
+MIT

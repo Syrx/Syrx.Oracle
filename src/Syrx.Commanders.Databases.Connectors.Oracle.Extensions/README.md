@@ -1,5 +1,22 @@
 # Syrx.Commanders.Databases.Connectors.Oracle.Extensions
 
+Provides dependency injection extensions for wiring the Oracle connector into Syrx.
+
+## Responsibilities
+
+- Registers Oracle connector services in `IServiceCollection`
+- Adds fluent builder support through `UseOracle`
+- Connects Oracle-specific settings to the Syrx configuration pipeline
+
+## When to use
+
+Use this package when you want to register Oracle support through DI without depending on the full top-level extension package.
+
+## Related packages
+
+- Syrx.Commanders.Databases.Connectors.Oracle
+- Syrx.Oracle.Extensions# Syrx.Commanders.Databases.Connectors.Oracle.Extensions
+
 Dependency injection extensions for Syrx Oracle database connectors.
 
 ## Table of Contents

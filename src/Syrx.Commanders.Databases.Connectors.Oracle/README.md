@@ -1,5 +1,23 @@
 # Syrx.Commanders.Databases.Connectors.Oracle
 
+Provides the Oracle-specific implementation of the Syrx database connector abstraction.
+
+## Responsibilities
+
+- Creates Oracle connections through `Oracle.ManagedDataAccess.Core`
+- Integrates Oracle into the Syrx connector pipeline
+- Supports the Oracle provider used by the higher-level packages in this repository
+
+## When to use
+
+Use this package when you need the low-level Oracle connector implementation without the higher-level convenience packages.
+
+## Related packages
+
+- Syrx.Commanders.Databases.Connectors.Oracle.Extensions
+- Syrx.Commanders.Databases.Oracle
+- Syrx.Oracle# Syrx.Commanders.Databases.Connectors.Oracle
+
 Core Oracle database connector for the Syrx framework.
 
 ## Table of Contents

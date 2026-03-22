@@ -1,5 +1,23 @@
 # Syrx.Oracle
 
+Provides the main Oracle provider package for Syrx.
+
+## Responsibilities
+
+- Combines the Oracle connector and Oracle-specific runtime support
+- Exposes the package surface most applications should reference directly
+- Supports Oracle usage patterns that remain consistent with the wider Syrx framework
+
+## When to use
+
+Use this package when you want Oracle support without the additional convenience registration package.
+
+## Related packages
+
+- Syrx.Oracle.Extensions
+- Syrx.Commanders.Databases.Connectors.Oracle
+- Syrx.Commanders.Databases.Oracle# Syrx.Oracle
+
 Oracle database data access provider for the Syrx framework.
 
 ## Table of Contents

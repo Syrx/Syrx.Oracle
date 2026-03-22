@@ -1,5 +1,22 @@
 # Syrx.Commanders.Databases.Oracle
 
+Provides Oracle-specific helpers for multiple result set handling through REF CURSOR parameters.
+
+## Responsibilities
+
+- Exposes `OracleDynamicParameters`
+- Creates numbered or named Oracle cursor parameters
+- Enables Oracle multiple-result-set scenarios for Syrx and Dapper-based execution
+
+## When to use
+
+Use this package when your Oracle queries or PL/SQL blocks return multiple result sets through cursors.
+
+## Related packages
+
+- Syrx.Commanders.Databases.Connectors.Oracle
+- Syrx.Oracle# Syrx.Commanders.Databases.Oracle
+
 Oracle-specific database components and extensions for the Syrx data access framework.
 
 ## Table of Contents
