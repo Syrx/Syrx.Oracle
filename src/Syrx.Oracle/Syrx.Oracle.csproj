@@ -2,6 +2,7 @@
 	<PropertyGroup>
 		<Description>This package provides Syrx support for Oracle databases.</Description>
 		<PackageTags>syrx;data access;orm;micro-orm;oracle</PackageTags>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -2,19 +2,20 @@
 {
     public class OracleFixture : Fixture, IAsyncLifetime
     {
+        private const string OracleImage = "gvenzl/oracle-xe:21.3.0-slim-faststart@sha256:f82bccdf6020d27373fdf0e93046b63eb3f777a0289e329d9839feebaf4555de";
+
         private readonly OracleContainer _container;
 
         public OracleFixture()
         {
-            var _logger = LoggerFactory.Create(b => b
+            var logger = LoggerFactory.Create(builder => builder
                 .AddConsole()
                 .AddSystemdConsole()
                 .AddSimpleConsole()).CreateLogger<OracleFixture>();
 
-            _container = new OracleBuilder()
-             .WithImage("gvenzl/oracle-xe:21.3.0-slim-faststart")
-             .WithReuse(true)
-             .WithLogger(_logger)
+            _container = new OracleBuilder(OracleImage)
+             .WithReuse(false)
+             .WithLogger(logger)
              .WithStartupCallback((container, token) =>
              {
                  var message = @$"{new string('=', 150)}
@@ -34,16 +35,12 @@ Image.Repository . : {container.Image.Repository}
 Image.Tag ........ : {container.Image.Tag}
 IpAddress ........ : {container.IpAddress}
 MacAddress ....... : {container.MacAddress}
-ConnectionString . : {container.GetConnectionString()}
 {new string('=', 150)}
 ";
                  container.Logger.LogInformation(message);
                  return Task.CompletedTask;
              })
              .Build();
-
-            // start
-            _container.StartAsync().Wait();
         }
 
         public async Task DisposeAsync()
@@ -54,10 +51,10 @@ ConnectionString . : {container.GetConnectionString()}
         public async Task InitializeAsync()
         {
             // line up
+            await _container.StartAsync();
+
             var connectionString = _container.GetConnectionString();
             var alias = "Syrx.Sql";
-
-            var provider = Installer.Install(alias, connectionString);
 
             // call Install() on the base type. 
             Install(() => Installer.Install(alias, connectionString));
