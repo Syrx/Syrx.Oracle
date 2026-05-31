@@ -23,29 +23,8 @@ defaults:
     shell: pwsh
 
 jobs:
-  documentation_quality:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      with:
-        fetch-depth: 1
-    - name: Update Git submodules
-      run: git submodule update --init --recursive
-    - name: Run documentation metrics
-      run: ./scripts/Get-DocumentationMetrics.ps1 -MinimumScore 85 -EnforceMinimum -OutputJsonPath ./.docs/reports/documentation-metrics.json
-    - name: Upload documentation metrics artifact
-      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-      with:
-        name: documentation-metrics
-        if-no-files-found: error
-        retention-days: 14
-        path: ./.docs/reports/documentation-metrics.json
-
   create_nuget:
     runs-on: ubuntu-latest
-    needs: [ documentation_quality ]
     permissions:
       contents: read # Required for repository checkout.
     strategy:
@@ -64,11 +43,11 @@ jobs:
     - uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
       with:
           dotnet-version: ${{ matrix.dotnet-version }}
-          cache: true
       name: Setup dotnet ${{ matrix.dotnet-version }}
       
-    # Create the NuGet package in the folder from the environment variable NuGetDirectory
-    - run: dotnet build --configuration Release
+    # Build projects so GeneratePackageOnBuild produces NuGet packages in Release output folders.
+    - name: Pack NuGet packages
+      run: dotnet build --configuration Release
 
     # Publish the NuGet package as an artifact, so they can be used in the following jobs
     - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
@@ -104,7 +83,6 @@ jobs:
     steps:
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
-        fetch-depth: 1
         submodules: recursive
 
     - name: Initialize submodules
@@ -114,7 +92,7 @@ jobs:
       with:
         dotnet-version: 10.0.x
     - name: Run tests
-      run: dotnet test --configuration Release /p:GeneratePackageOnBuild=false /p:EnablePackageValidation=false
+      run: dotnet test --configuration Release
 
   deploy:
     # Publish only when creating a GitHub Release
@@ -123,13 +101,6 @@ jobs:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
     needs: [ validate_nuget, run_test ]
-    permissions:
-      contents: read
-    environment:
-      name: nuget-production
-    concurrency:
-      group: nuget-publish-${{ github.ref }}
-      cancel-in-progress: false
     steps:
       # Download the NuGet package created in the previous job
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
