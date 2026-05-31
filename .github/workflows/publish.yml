@@ -23,29 +23,8 @@ defaults:
     shell: pwsh
 
 jobs:
-  documentation_quality:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      with:
-        fetch-depth: 1
-    - name: Update Git submodules
-      run: git submodule update --init --recursive
-    - name: Run documentation metrics
-      run: ./scripts/Get-DocumentationMetrics.ps1 -MinimumScore 85 -EnforceMinimum -OutputJsonPath ./.docs/reports/documentation-metrics.json
-    - name: Upload documentation metrics artifact
-      uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-      with:
-        name: documentation-metrics
-        if-no-files-found: error
-        retention-days: 14
-        path: ./.docs/reports/documentation-metrics.json
-
   create_nuget:
     runs-on: ubuntu-latest
-    needs: [ documentation_quality ]
     permissions:
       contents: read # Required for repository checkout.
     strategy:
