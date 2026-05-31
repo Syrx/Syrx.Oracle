@@ -43,7 +43,6 @@ jobs:
     - uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
       with:
           dotnet-version: ${{ matrix.dotnet-version }}
-          cache: true
       name: Setup dotnet ${{ matrix.dotnet-version }}
       
     # Create NuGet packages in a deterministic artifact directory.
